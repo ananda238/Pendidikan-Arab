@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz bab 1</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="main-card">
+            <div class="glow-effect"></div>
+            <h2 class="page-title">اَلْاِخْتِبَارُ - التَّعَارُفُ</h2>
+            <div class="arabic-text" style="font-size: 18px; color: #2563eb; margin-bottom: 30px; text-align: center;">
+                Quiz - Perkenalan
+            </div>
+
+            <!-- Perintah Belajar -->
+            <div id="quiz-instruction"
+                style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);">
+                <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">
+                    🎯 petunjuk pengerjaan
+                </div>
+                <div style="font-size: 16px; margin-bottom: 8px;" class="arabic-text">
+                    اِخْتَرِ الْإِجَابَةَ الصَّحِيحَةَ مِنْ بَيْنِ الْإِجَابَاتِ الْآتِيَةِ
+                </div>
+                <div style="font-size: 14px; opacity: 0.9;">
+                    Pilihlah jawaban yang benar di antara jawaban-jawaban berikut!
+                </div>
+            </div>
+
+            <!-- 
+      Konten Kuis Interaktif
+      Placeholder lama DIBUANG. Diganti ini.
+    -->
+            <div id="quiz-container"
+                style="background: rgba(255, 255, 255, 0.9); border: 2px solid rgba(234, 88, 12, 0.2); border-radius: 15px; padding: 30px; text-align: left; box-shadow: 0 8px 25px rgba(0,0,0,0.05); min-height: 300px;">
+                <!-- Pertanyaan dan jawaban akan di-load oleh JS di sini -->
+            </div>
+
+            <!-- Kontainer Hasil (Awalnya disembunyikan) -->
+            <div id="result-container"
+                style="display: none; background: rgba(255, 255, 255, 0.9); border: 2px solid #10b981; border-radius: 15px; padding: 30px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.05); margin-top: 20px;">
+                <h3 style="font-size: 24px; font-weight: 700; color: #059669;">HASIL QUIZ</h3>
+                <div id="score" style="font-size: 48px; font-weight: 700; color: #10b981; margin: 20px 0;"></div>
+                <div id="score-text" style="font-size: 18px; color: #333; margin-bottom: 25px;"></div>
+                <button class="btn btn-primary" onclick="restartQuiz()">
+                    <span>🔄</span> <span>Ulangi Quiz</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- 
+  =============================================================
+  Data JSON Kuis (Dari file .docx lo)
+  =============================================================
+-->
+        <script id="quiz-data" type="application/json">
+{
+    "questions": [
+        {
+            "questionNumber": 1,
+            "question": "Apa arti kata طَالِبٌ dalam teks Qiro'ah?",
+            "answerOptions": [
+                {"text": "Guru"},
+                {"text": "Murid", "isCorrect": true},
+                {"text": "Pedagang"},
+                {"text": "Polisi"}
+            ],
+            "rationale": "طَالِبٌ (Tholibun) adalah istilah dalam Bahasa Arab untuk murid laki-laki."
+        },
+        {
+            "questionNumber": 2,
+            "question": "Siapakah kepala sekolah (نَاظِرُ الْمَدْرَسَةِ) dalam teks tersebut?",
+            "answerOptions": [
+                {"text": "الْأُسْتَاذُ مَنْصُورٌ", "isCorrect": true},
+                {"text": "الْأُسْتَاذَةُ نَفِيسَةُ"},
+                {"text": "السَّيِّدُ عُمَرُ"},
+                {"text": "السَّيِّدُ خَالِصٌ"}
+            ],
+            "rationale": "Teks Qiro'ah menyebutkan: وَذَلِكَ الْأُسْتَاذُ مَنْصُورٌ، هُوَ نَاظِرُ الْمَدْرَسَةِ (Dan itu Ustadz Mansur, dia kepala sekolah)."
+        },
+        {
+            "questionNumber": 3,
+            "question": "Apa pekerjaan Ustadzah Nafisah?",
+            "answerOptions": [
+                {"text": "مُوَظَّفَةٌ (Pegawai)"},
+                {"text": "بَائِعَةٌ (Penjual)"},
+                {"text": "مُدَرِّسَةُ اللُّغَةِ العَرَبِيَّةِ", "isCorrect": true},
+                {"text": "خَادِمَةٌ (Pembantu)"}
+            ],
+            "rationale": "Teks Qiro'ah menyebutkan: تِلْكَ مُدَرِّسَتِيْ، اِسْمُهَا الْأُسْتَاذَةُ نَفِيسَةُ، هِيَ مُدَرِّسَةُ اللُّغَةِ العَرَبِيَّةِ."
+        },
+        {
+            "questionNumber": 4,
+            "question": "Siapakah penjaga perpustakaan (أَمِينُ الْمَكْتَبَةِ)?",
+            "answerOptions": [
+                {"text": "السَّيِّدُ مَسْعُودٌ"},
+                {"text": "السَّيِّدُ خَالِصٌ"},
+                {"text": "السَّيِّدُ عُمَرُ", "isCorrect": true},
+                {"text": "السَّيِّدُ حَفِيظٌ"}
+            ],
+            "rationale": "Teks Qiro'ah menyebutkan: ذَلِكَ السَّيِّدُ عُمَرُ، هُوَ أَمِينُ الْمَكْتَبَةِ (Itu Tuan Umar, dia penjaga perpustakaan)."
+        },
+        {
+            "questionNumber": 5,
+            "question": "Siapakah Nyonya Hafshah (السَّيِّدَةُ حَفْصَةُ) dalam teks tersebut?",
+            "answerOptions": [
+                {"text": "مُدَرِّسَةٌ (Guru)"},
+                {"text": "مُوَظَّفَةٌ فِي الْمَكْتَبَةِ", "isCorrect": true},
+                {"text": "بَائِعَةٌ (Penjual)"},
+                {"text": "خَادِمَةٌ (Pembantu)"}
+            ],
+            "rationale": "Teks Qiro'ah menyebutkan: وَتِلْكَ السَّيِّدَةُ حَفْصَةُ، هِيَ مُوَظَّفَةٌ فِي الْمَكْتَبَةِ (Dan itu Nyonya Hafshah, dia pegawai di perpustakaan)."
+        },
+        {
+            "questionNumber": 6,
+            "question": "Siapa nama saudara laki-laki Faruq (أَخِيْ)?",
+            "answerOptions": [
+                {"text": "مَنْصُورٌ"},
+                {"text": "صَالِحٌ", "isCorrect": true},
+                {"text": "خَالِصٌ"},
+                {"text": "حَفِيظٌ"}
+            ],
+            "rationale": "Teks Qiro'ah menyebutkan: وَهَذَا أَخِيْ، اِسْمُهُ صَالِحٌ (Dan ini saudara laki-lakiku, namanya Shalih)."
+        },
+        {
+            "questionNumber": 7,
+            "question": "Apa arti kata بَائِعٌ?",
+            "answerOptions": [
+                {"text": "Perawat"},
+                {"text": "Pedagang", "isCorrect": true},
+                {"text": "Dokter"},
+                {"text": "Penulis"}
+            ],
+            "rationale": "بَائِعٌ (Baa'iun) berarti pedagang/penjual laki-laki. Teks Qiro'ah menyebut السَّيِّدُ خَالِصٌ... هُوَ بَائِعٌ."
+        },
+        {
+            "questionNumber": 8,
+            "question": "Siapakah sopir (السَّائِقُ) dalam teks tersebut?",
+            "answerOptions": [
+                {"text": "السَّيِّدُ خَالِصٌ"},
+                {"text": "السَّيِّدُ حَفِيظٌ", "isCorrect": true},
+                {"text": "السَّيِّدُ مَسْعُودٌ"},
+                {"text": "السَّيِّدُ عُمَرُ"}
+            ],
+            "rationale": "Teks Qiro'ah menyebutkan: وَذَلِكَ السَّائِقُ اِسْمُهُ السَّيِّدُ حَفِيظٌ (Dan itu sopir, namanya Tuan Hafidz)."
+        },
+        {
+            "questionNumber": 9,
+            "question": "Dari manakah Tuan Mas’ud (السَّيِّدُ مَسْعُودٌ) berasal?",
+            "answerOptions": [
+                {"text": "مِنْ بَانْدُونج"},
+                {"text": "مِنْ سُورَابَايَا", "isCorrect": true},
+                {"text": "مِنْ جَاكَرْتَا"},
+                {"text": "مِنْ بَالِي"}
+            ],
+            "rationale": "Teks Qiro'ah menyebutkan: اِسْمُهُ السَّيِّدُ مَسْعُودٌ، هُوَ مِنْ سُورَابَايَا (Namanya Tuan Mas'ud, dia dari Surabaya)."
+        },
+        {
+            "questionNumber": 10,
+            "question": "Siapakah Nabilah (نَبِيلَةُ) dalam teks tersebut?",
+            "answerOptions": [
+                {"text": "خَادِمَةٌ مِنْ بَانْدُونج", "isCorrect": true},
+                {"text": "مُدَرِّسَةٌ مِنْ سُورَابَايَا"},
+                {"text": "مُوَظَّفَةٌ فِي الْمَكْتَبَةِ"},
+                {"text": "بَائِعَةٌ فِي السُّوقِ"}
+            ],
+            "rationale": "Teks Qiro'ah menyebutkan: وَتِلْكَ خَادِمَةٌ، اِسْمُهَا نَبِيلَةُ، هِيَ مِنْ بَانْدُونج (Dan itu pembantu, namanya Nabilah, dia dari Bandung)."
+        },
+        {
+            "questionNumber": 11,
+            "question": "Kalimat manakah yang termasuk Mubtada’ dan Khabar?",
+            "answerOptions": [
+                {"text": "هَذَا كِتَابٌ", "isCorrect": true},
+                {"text": "أَيْنَ الكِتَابُ؟"},
+                {"text": "مَنْ أَنْتَ؟"},
+                {"text": "أَنَا فِي المَدْرَسَةِ"}
+            ],
+            "rationale": "هَذَا (Isim Isyarah) berfungsi sebagai Mubtada' dan كِتَابٌ (Isim Nakirah) berfungsi sebagai Khabar."
+        },
+        {
+            "questionNumber": 12,
+            "question": "Dalam kalimat هَذِهِ بِنْتٌ, kata هَذِهِ termasuk jenis...",
+            "answerOptions": [
+                {"text": "Isim Istifham (Kata Tanya)"},
+                {"text": "Isim Isyarah (Kata Tunjuk)", "isCorrect": true},
+                {"text": "Dhomir (Kata Ganti)"},
+                {"text": "Khabar (Predikat)"}
+            ],
+            "rationale": "هَذِهِ (hadzihi) adalah kata tunjuk untuk objek/orang perempuan (muannats) yang dekat."
+        },
+        {
+            "questionNumber": 13,
+            "question": "Kata tanya مَنْ (Siapa) termasuk dalam kelompok...",
+            "answerOptions": [
+                {"text": "Isim Isyarah"},
+                {"text": "Dhomir"},
+                {"text": "Isim Istifham", "isCorrect": true},
+                {"text": "Mubtada'"}
+            ],
+            "rationale": "Isim Istifham adalah kata yang digunakan untuk bertanya, seperti مَنْ (siapa), مَا (apa), dan أَيْنَ (di mana)."
+        },
+        {
+            "questionNumber": 14,
+            "question": "Dalam kalimat أَنَا طَالِبٌ, kata أَنَا disebut...",
+            "answerOptions": [
+                {"text": "Isim Isyarah"},
+                {"text": "Dhomir", "isCorrect": true},
+                {"text": "Isim Istifham"},
+                {"text": "Khabar"}
+            ],
+            "rationale": "أَنَا (Saya) adalah Dhomir Munfashil (Kata Ganti Terpisah) yang berfungsi sebagai Mubtada' dalam kalimat tersebut."
+        },
+        {
+            "questionNumber": 15,
+            "question": "Pilih kalimat yang mengandung Isim Istifham 'أَيْنَ' (Di mana)!",
+            "answerOptions": [
+                {"text": "أَيْنَ أَبُوكَ؟", "isCorrect": true},
+                {"text": "هَذَا أَبِي"},
+                {"text": "أَنَا فِي البَيْتِ"},
+                {"text": "تِلْكَ بِنْتٌ"}
+            ],
+            "rationale": "أَيْنَ أَبُوكَ؟ (Di mana ayahmu?) adalah satu-satunya kalimat yang menggunakan kata tanya أَيْنَ."
+        },
+        {
+            "questionNumber": 16,
+            "question": "Lengkapi kalimat berikut dengan Isim Isyarah yang tepat! ... بَيْتٌ جَمِيلٌ",
+            "answerOptions": [
+                {"text": "هَذِهِ"},
+                {"text": "تِلْكَ"},
+                {"text": "هَذَا", "isCorrect": true},
+                {"text": "ذٰلِكَ"}
+            ],
+            "rationale": "Kata بَيْتٌ (rumah) adalah mudzakar (laki-laki), jadi harus menggunakan kata tunjuk mudzakar seperti هَذَا (ini) atau ذٰلِكَ (itu). Opsi هَذَا lebih umum."
+        }
+    ]
+}
+</script>
+
+        <!-- 
+  =============================================================
+  JavaScript untuk Menjalankan Kuis
+  =============================================================
+-->
+        <script>
+            (function () {
+                // Cek dulu, jangan sampe script-nya jalan dua kali kalo user bolak-balik
+                if (window.quizScriptLoaded) {
+                    // Jika sudah di-load, panggil restartQuiz() untuk memulai ulang
+                    restartQuiz();
+                    return;
+                }
+                window.quizScriptLoaded = true;
+
+                let currentQuestionIndex = 0;
+                let score = 0;
+                let questions = [];
+
+                const quizContainer = document.getElementById('quiz-container');
+                const resultContainer = document.getElementById('result-container');
+                const scoreElement = document.getElementById('score');
+                const scoreTextElement = document.getElementById('score-text');
+                const instructionBox = document.getElementById('quiz-instruction');
+
+                function loadQuiz() {
+                    try {
+                        const quizDataElement = document.getElementById('quiz-data');
+                        if (!quizDataElement) {
+                            console.error('Quiz data element not found!');
+                            quizContainer.innerHTML = '<p>Error: Gagal memuat data kuis.</p>';
+                            return;
+                        }
+                        const quizData = JSON.parse(quizDataElement.textContent);
+                        if (!quizData || !quizData.questions) {
+                            throw new Error('Invalid quiz data structure');
+                        }
+                        questions = quizData.questions;
+                        startQuiz();
+                    } catch (error) {
+                        console.error('Failed to load or parse quiz data:', error);
+                        quizContainer.innerHTML = `<p>Error: Gagal memuat kuis. ${error.message}</p>`;
+                    }
+                }
+
+                function startQuiz() {
+                    currentQuestionIndex = 0;
+                    score = 0;
+                    resultContainer.style.display = 'none';
+                    instructionBox.style.display = 'block';
+                    quizContainer.style.display = 'block';
+                    showQuestion(questions[currentQuestionIndex]);
+                }
+
+                function showQuestion(question) {
+                    if (!question) {
+                        showResults();
+                        return;
+                    }
+
+                    // Arahkan (scroll) ke atas kuis setiap ganti pertanyaan
+                    const mainCard = quizContainer.closest('.main-card');
+                    if (mainCard) {
+                        mainCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+
+                    let optionsHtml = '';
+                    question.answerOptions.forEach((option, index) => {
+                        // Kita tambahkan 'data-correct' dan 'data-rationale' untuk validasi
+                        optionsHtml += `
+                    <button 
+                        class="btn quiz-option" 
+                        style="background: #f1f5f9; color: #333; width: 100%; justify-content: flex-start; text-align: left; margin-bottom: 10px; padding: 15px 20px;"
+                        onclick="selectAnswer(this, ${option.isCorrect || false}, '${btoa(encodeURIComponent(question.rationale))}')"
+                    >
+                        <span class="arabic-text">${option.text}</span>
+                    </button>
+                `;
+                    });
+
+                    quizContainer.innerHTML = `
+                <h3 class="arabic-text" style="font-size: 20px; font-weight: 700; color: #ea580c; margin-bottom: 15px;">
+                    السُّؤَالُ ${question.questionNumber}:
+                </h3>
+                <p style="font-size: 18px; line-height: 1.8; color: #333; margin-bottom: 20px; font-weight: 600;" class="${isArabic(question.question) ? 'arabic-text' : ''}">
+                    ${question.question}
+                </p>
+                <div id="options-container">
+                    ${optionsHtml}
+                </div>
+                <div id="rationale-container" style="display: none; margin-top: 15px; padding: 15px; border-radius: 10px; font-size: 14px;"></div>
+                    <button 
+                        id="next-btn" 
+                        class="btn btn-secondary quiz" 
+                        style="display: none; margin-top: 20px; width: 100%;"
+                        onclick="nextQuestion()"
+                    >
+                        Lanjut <span>&rarr;</span>
+                    </button>
+            `;
+                }
+
+                function isArabic(text) {
+                    // Cek sederhana apakah teks mengandung karakter Arab
+                    const arabicRegex = /[\u0600-\u06FF]/;
+                    return arabicRegex.test(text);
+                }
+
+                window.selectAnswer = function (button, isCorrect, encodedRationale) {
+                    const optionsContainer = document.getElementById('options-container');
+                    const rationaleContainer = document.getElementById('rationale-container');
+                    const nextBtn = document.getElementById('next-btn');
+
+                    // Nonaktifkan semua tombol setelah dipilih
+                    const allOptions = optionsContainer.querySelectorAll('.quiz-option');
+                    allOptions.forEach(btn => {
+                        btn.disabled = true;
+                        btn.style.cursor = 'not-allowed';
+                        btn.style.opacity = '0.7';
+                    });
+
+                    // Tampilkan rationale
+                    try {
+                        const rationale = decodeURIComponent(atob(encodedRationale));
+                        rationaleContainer.innerHTML = `<strong>Penjelasan:</strong> ${rationale}`;
+                        rationaleContainer.style.display = 'block';
+                    } catch (e) {
+                        console.error("Error decoding rationale:", e);
+                        rationaleContainer.innerHTML = '<strong>Penjelasan:</strong> Gagal memuat penjelasan.';
+                        rationaleContainer.style.display = 'block';
+                    }
+
+
+                    if (isCorrect) {
+                        score++;
+                        button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                        button.style.color = 'white';
+                        button.style.opacity = '1';
+                        rationaleContainer.style.background = 'rgba(16, 185, 129, 0.1)';
+                        rationaleContainer.style.border = '2px solid #10b981';
+                    } else {
+                        button.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                        button.style.color = 'white';
+                        button.style.opacity = '1';
+                        rationaleContainer.style.background = 'rgba(239, 68, 68, 0.1)';
+                        rationaleContainer.style.border = '2px solid #ef4444';
+
+                        // Tunjukkan jawaban yang benar
+                        allOptions.forEach(btn => {
+                            // Kita perlu cara untuk 'tahu' mana yg benar
+                            // Kita bisa cek ulang dari data 'questions'
+                            const optionText = btn.querySelector('.arabic-text').textContent;
+                            const correctOption = questions[currentQuestionIndex].answerOptions.find(opt => opt.isCorrect);
+                            if (correctOption && correctOption.text === optionText) {
+                                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                                btn.style.color = 'white';
+                                btn.style.opacity = '1';
+                            }
+                        });
+                    }
+
+                    // Tampilkan tombol Lanjut
+                    nextBtn.style.display = 'inline-flex';
+                }
+
+                window.nextQuestion = function () {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        showQuestion(questions[currentQuestionIndex]);
+                    } else {
+                        showResults();
+                    }
+                }
+
+                function showResults() {
+                    quizContainer.style.display = 'none';
+                    instructionBox.style.display = 'none';
+                    resultContainer.style.display = 'block';
+
+                    const percentage = Math.round((score / questions.length) * 100);
+                    scoreElement.textContent = `${percentage}%`;
+
+                    let text = '';
+                    if (percentage === 100) {
+                        text = `Mumtaz! (Luar Biasa!) Kamu menjawab semua ${questions.length} soal dengan benar.`;
+                        scoreElement.style.color = '#10b981';
+                    } else if (percentage >= 80) {
+                        text = `Jayyid Jiddan! (Bagus Sekali!) Kamu benar ${score} dari ${questions.length} soal.`;
+                        scoreElement.style.color = '#10b981';
+                    } else if (percentage >= 60) {
+                        text = `Jayyid! (Bagus) Kamu benar ${score} dari ${questions.length} soal. Terus berlatih!`;
+                        scoreElement.style.color = '#f59e0b';
+                    } else {
+                        text = `Butuh latihan lagi. Kamu benar ${score} dari ${questions.length} soal. Coba lagi!`;
+                        scoreElement.style.color = '#ef4444';
+                    }
+                    scoreTextElement.textContent = text;
+
+                    // Scroll ke hasil
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                // Buat fungsi restart global biar bisa dipanggil dari tombol
+                window.restartQuiz = function () {
+                    startQuiz();
+                }
+
+                // Panggil loadQuiz() saat script ini dieksekusi
+                // (yang terjadi saat halaman 'quizBab1Page.html' di-fetch ke container)
+                loadQuiz();
+
+            })();
+        </script>
+
+    </div>
+    <a href="../bab1-menu.html">
+        <button class="btn btn-back ripple-effect" id="backButtonTop" style="display: flex;">
+            <span>←</span> <span>KEMBALI</span> </button>
+    </a>
+</body>
+
+</html>

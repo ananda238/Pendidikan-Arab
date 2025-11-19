@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu BAB 3</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="script/script.js" defer></script>
+</head>
+
+<body>
+    <div class="particles" id="particles">
+        <div class="container ">
+            <div class="main-card menu">
+                <div class="glow-effect"></div>
+
+                <div class="chapter-decorations" id="chapterDecorations"
+                    style="background: radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);">
+                    <div class="decoration-element top-left wave" style="animation-delay: 0s;">✏️</div>
+                    <div class="decoration-element top-right bounce" style="animation-delay: 0.5s;">📝</div>
+                    <div class="decoration-element bottom-left pulse" style="animation-delay: 1s;">📐</div>
+                    <div class="decoration-element bottom-right float" style="animation-delay: 1.5s;">🎒</div>
+                </div>
+
+                <h2 class="page-title">BAB 3</h2>
+                <div class="arabic-title arabic-text" id="chapterArabicTitle">
+                    الْأَدَوَاتُ ٱلْمَدْرَسِيَّةُ
+                </div>
+
+                <!-- MENU GRID -->
+                <div class="submenu-grid">
+
+                    <!-- Mufrodat -->
+                    <button class="btn btn-submenu btn-mufrodat click-effect" onclick="babPage('mufrodat','3')">
+                        <div style="font-size: 36px; margin-bottom: 5px;">📖</div>
+                        <div class="arabic-text" style="font-size: 20px;">الْمُفْرَدَاتُ</div>
+                        <div style="font-size: 15px;">Mufrodat</div>
+                    </button>
+
+                    <!-- Istima -->
+                    <button class="btn btn-submenu btn-istima click-effect" onclick="babPage('istima','3')">
+                        <div style="font-size: 36px; margin-bottom: 5px;">👂</div>
+                        <div class="arabic-text" style="font-size: 20px;">الْاِسْتِمَاعُ</div>
+                        <div style="font-size: 15px;">Istima'</div>
+                    </button>
+
+                    <!-- Qiroah -->
+                    <button class="btn btn-submenu btn-qiroah click-effect" onclick="babPage('qiroah','3')">
+                        <div style="font-size: 36px; margin-bottom: 5px;">📚</div>
+                        <div class="arabic-text" style="font-size: 20px;">الْقِرَاءَةُ</div>
+                        <div style="font-size: 15px;">Qiro'ah</div>
+                    </button>
+
+                    <!-- Qowaid -->
+                    <button class="btn btn-submenu btn-qowaid click-effect" onclick="babPage('qowaid','3')">
+                        <div style="font-size: 36px; margin-bottom: 5px;">📝</div>
+                        <div class="arabic-text" style="font-size: 20px;">الْقَوَاعِدُ</div>
+                        <div style="font-size: 15px;">Qowaid</div>
+                    </button>
+
+                </div>
+
+                <!-- Quizz (sebelah Kalam) -->
+                <div style="display: flex; justify-content: center; margin-top: 25px;">
+                    <button class="btn btn-submenu btn-quizz click-effect" onclick="babPage('Quiz','3')"
+                        style="background: linear-gradient(135deg, #10b981, #059669);">
+                        <div style="font-size: 36px; margin-bottom: 5px;">📊</div>
+                        <div style="font-size: 15px;">Quizz</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <a href="menu.html">
+            <button class="btn btn-back ripple-effect" id="backButtonTop" style="display: flex;">
+                <span>←</span> <span>KEMBALI</span>
+            </button>
+        </a>
+
+    </div>
+</body>
+
+</html>

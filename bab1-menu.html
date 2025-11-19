@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu BAB 1</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="script/script.js" defer></script>
+</head>
+
+<body>
+    <div class="particles" id="particles">
+        <div class="container">
+            <div class="main-card menu">
+                <div class="glow-effect"></div>
+
+                <div class="chapter-decorations" id="chapterDecorations"
+                    style="background: radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);">
+                    <div class="decoration-element top-left wave" style="animation-delay: 0s;">👋</div>
+                    <div class="decoration-element top-right bounce" style="animation-delay: 0.5s;">🤝</div>
+                    <div class="decoration-element bottom-left pulse" style="animation-delay: 1s;">😊</div>
+                    <div class="decoration-element bottom-right float" style="animation-delay: 1.5s;">👥</div>
+                </div>
+
+                <h2 class="page-title">BAB 1</h2>
+                <div class="arabic-title arabic-text" id="chapterArabicTitle">التَّعَارُفُ</div>
+                <div class="submenu-grid"><button onclick="babPage('mufrodat','1')"
+                        class="btn btn-submenu btn-mufrodat click-effect" data-click-added="true">
+                        <div style="font-size: 36px; margin-bottom: 5px;">📖</div>
+                        <div class="arabic-text" style="font-size: 20px; font-weight: 700; margin-bottom: 3px;">
+                            الْمُفْرَدَاتُ</div>
+                        <div style="font-size: 15px; margin-top: 2px;">Mufrodat</div>
+                    </button>
+                    <button class="btn btn-submenu btn-istima click-effect" data-click-added="true"
+                        onclick="babPage('istima','1')">
+                        <div style="font-size: 36px; margin-bottom: 5px;">👂</div>
+                        <div class="arabic-text" style="font-size: 20px; font-weight: 700; margin-bottom: 3px;">
+                            الْاِسْتِمَاعُ</div>
+                        <div style="font-size: 15px; margin-top: 2px;">Istima'</div>
+                    </button>
+                    <button class="btn btn-submenu btn-qiroah click-effect" data-click-added="true"
+                        onclick="babPage('qiroah','1')">
+                        <div style="font-size: 36px; margin-bottom: 5px;">📚</div>
+                        <div class="arabic-text" style="font-size: 20px; font-weight: 700; margin-bottom: 3px;">
+                            الْقِرَاءَةُ</div>
+                        <div style="font-size: 15px; margin-top: 2px;">Qiro'ah</div>
+                    </button>
+                    <button class="btn btn-submenu btn-qowaid click-effect" data-click-added="true"
+                        onclick="babPage('qowaid','1')">
+                        <div style="font-size: 36px; margin-bottom: 5px;">📝</div>
+                        <div class="arabic-text" style="font-size: 20px; font-weight: 700; margin-bottom: 3px;">
+                            الْقَوَاعِدُ</div>
+                        <div style="font-size: 15px; margin-top: 2px;">Qowaid</div>
+                    </button>
+
+                </div>
+                <div style="display: flex; width: 50%; justify-content: center;  flex-direction: column; gap: 10px;">
+                    <a href="https://wordwall.net/play/101680/985/171"><button
+                            class="btn btn-submenu btn-mufrodat click-effect" style="width: 100%;">
+                            <div style="font-size: 15px; margin-top: 2px;"> Quiz Mufrodat</div>
+                        </button>
+                    </a>
+                    <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSc6WB5VUBN_9l9nAtZGZhqHLrbH9BKtLbKUEmf704Pv5xCpuA/viewform"><button
+                            class="btn btn-submenu btn-istima click-effect" style="width: 100%;">
+                            <div style="font-size: 15px; margin-top: 2px;">Quiz Istima</div>
+                        </button>
+                    </a>
+                    <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSerxLwckGP3WNKYmX5EPPz2LoGOSjIn2SAwgN-5ZD-AECixmQ/viewform"><button
+                            class="btn btn-submenu btn-qiroah click-effect" style="width: 100%;">
+                            <div style="font-size: 15px; margin-top: 2px;">Quiz Qiroah</div>
+                        </button>
+                    </a>
+                    <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSerxLwckGP3WNKYmX5EPPz2LoGOSjIn2SAwgN-5ZD-AECixmQ/viewform"><button
+                            class="btn btn-submenu btn-qowaid click-effect" style="width: 100%;">
+                            <div style="font-size: 15px; margin-top: 2px;">Quiz Qowaid</div>
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+        <a href="menu.html">
+            <button class="btn btn-back ripple-effect" id="backButtonTop" style="display: flex;">
+                <span>←</span> <span>KEMBALI</span> </button>
+        </a>
+    </div>
+</body>
+
+</html>

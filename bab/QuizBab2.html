@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="main-card">
+            <div class="glow-effect"></div>
+            <h2 class="page-title">اَلْاِخْتِبَارُ - الْمَرَافِقُ ٱلْمَدْرَسِيَّةُ</h2>
+            <div class="arabic-text" style="font-size: 18px; color: #2563eb; margin-bottom: 30px; text-align: center;">
+                Quiz - Fasilitas Sekolah
+            </div>
+
+            <!-- Perintah Belajar -->
+            <div id="quiz-instruction"
+                style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);">
+                <div style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">
+                    🎯 petunjuk pengerjaan
+                </div>
+                <div style="font-size: 16px; margin-bottom: 8px;" class="arabic-text">
+                    اِخْتَرِ الْإِجَابَةَ الصَّحِيحَةَ مِنْ بَيْنِ الْإِجَابَاتِ الْآتِيَةِ
+                </div>
+                <div style="font-size: 14px; opacity: 0.9;">
+                    Pilihlah jawaban yang benar di antara jawaban-jawaban berikut!
+                </div>
+            </div>
+
+            <!-- Konten Kuis Interaktif -->
+            <div id="quiz-container"
+                style="background: rgba(255, 255, 255, 0.9); border: 2px solid rgba(234, 88, 12, 0.2); border-radius: 15px; padding: 30px; text-align: left; box-shadow: 0 8px 25px rgba(0,0,0,0.05); min-height: 300px;">
+                <!-- Pertanyaan dan jawaban akan di-load oleh JS di sini -->
+            </div>
+
+            <!-- Kontainer Hasil (Awalnya disembunyikan) -->
+            <div id="result-container"
+                style="display: none; background: rgba(255, 255, 255, 0.9); border: 2px solid #10b981; border-radius: 15px; padding: 30px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.05); margin-top: 20px;">
+                <h3 style="font-size: 24px; font-weight: 700; color: #059669;">HASIL QUIZ</h3>
+                <div id="score" style="font-size: 48px; font-weight: 700; color: #10b981; margin: 20px 0;"></div>
+                <div id="score-text" style="font-size: 18px; color: #333; margin-bottom: 25px;"></div>
+                <button class="btn btn-primary" onclick="restartQuiz()">
+                    <span>🔄</span> <span>Ulangi Quiz</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- 
+  =============================================================
+  Data JSON Kuis (Bab 2)
+  =============================================================
+-->
+        <script id="quiz-data" type="application/json">
+{
+    "questions": [
+        {
+            "questionNumber": 1,
+            "question": "Di mana Ali dan Ahmad berbicara? (Berdasarkan video Istima')",
+            "answerOptions": [
+                {"text": "أ. فِي الْفَصْلِ", "isCorrect": false},
+                {"text": "ب. فِي الْمَكْتَبَةِ", "isCorrect": false},
+                {"text": "ج. فِي الْمَدْرَسَةِ", "isCorrect": false},
+                {"text": "د. فِي الْحَدِيقَةِ", "isCorrect": true}
+            ],
+            "rationale": "Video menunjukkan mereka sedang duduk dan berbicara di taman (الْحَدِيقَةِ) sekolah."
+        },
+        {
+            "questionNumber": 2,
+            "question": "Siapa nama kedua tokoh dalam percakapan video Istima'?",
+            "answerOptions": [
+                {"text": "أ. عَلِيٌّ وَأَحْمَدُ", "isCorrect": true},
+                {"text": "ب. خَالِدٌ وَمُحَمَّدٌ", "isCorrect": false},
+                {"text": "ج. سَعِيدٌ وَيُوسُفُ", "isCorrect": false},
+                {"text": "د. أَحْمَدُ وَمُنِيرٌ", "isCorrect": false}
+            ],
+            "rationale": "Nama Ali dan Ahmad disebutkan secara eksplisit dalam dialog."
+        },
+        {
+            "questionNumber": 3,
+            "question": "Apa topik percakapan mereka? (Video Istima')",
+            "answerOptions": [
+                {"text": "أ. عَنِ الْمَطْعَمِ", "isCorrect": false},
+                {"text": "ب. عَنِ الْفُصُولِ الدِّرَاسِيَّةِ", "isCorrect": false},
+                {"text": "ج. عَنِ الْمَرَافِقِ فِي الْمَدْرَسَةِ", "isCorrect": true},
+                {"text": "د. عَنِ الرِّحْلَةِ", "isCorrect": false}
+            ],
+            "rationale": "Mereka secara spesifik membahas berbagai fasilitas (الْمَرَافِقِ) seperti masjid dan laboratorium."
+        },
+        {
+            "questionNumber": 4,
+            "question": "Apa yang disukai Ahmad di sekolah? (Video Istima')",
+            "answerOptions": [
+                {"text": "أ. الْمَسْجِدُ", "isCorrect": false},
+                {"text": "ب. الْمَعْمَلُ", "isCorrect": true},
+                {"text": "ج. الْمَكْتَبَةُ", "isCorrect": false},
+                {"text": "د. الْمَلْعَبُ", "isCorrect": false}
+            ],
+            "rationale": "Ahmad secara spesifik menyebutkan bahwa dia menyukai laboratorium (الْمَعْمَلُ)."
+        },
+        {
+            "questionNumber": 5,
+            "question": "Apa yang disukai Ali di sekolah? (Video Istima')",
+            "answerOptions": [
+                {"text": "أ. الْمَعْمَلُ", "isCorrect": false},
+                {"text": "ب. الْمَلْعَبُ", "isCorrect": false},
+                {"text": "ج. الْمَسْجِدُ", "isCorrect": true},
+                {"text": "د. الْمَكْتَبَةُ", "isCorrect": false}
+            ],
+            "rationale": "Ali secara spesifik menyebutkan bahwa dia menyukai masjid (الْمَسْجِدُ) di sekolah."
+        },
+        {
+            "questionNumber": 6,
+            "question": "Berapa jumlah laboratorium di sekolah itu? (Video Istima')",
+            "answerOptions": [
+                {"text": "أ. مَعْمَلٌ وَاحِدٌ", "isCorrect": false},
+                {"text": "ب. مَعْمَلَانِ", "isCorrect": true},
+                {"text": "ج. ثَلَاثَةُ مَعَامِلَ", "isCorrect": false},
+                {"text": "د. أَرْبَعَةُ مَعَامِلَ", "isCorrect": false}
+            ],
+            "rationale": "Dialog menyebutkan ada dua laboratorium (مَعْمَلَانِ): lab sains dan lab komputer."
+        },
+        {
+            "questionNumber": 7,
+            "question": "Laboratorium apa saja yang ada di sekolah? (Video Istima')",
+            "answerOptions": [
+                {"text": "أ. مَعْمَلُ الْعُلُومِ وَمَعْمَلُ الْحَاسُوبِ", "isCorrect": true},
+                {"text": "ب. مَعْمَلُ الْكِيمْيَاءِ وَمَعْمَلُ الْمُوسِيقَى", "isCorrect": false},
+                {"text": "ج. مَعْمَلُ الْفَنِّ وَمَعْمَلُ الرِّيَاضَةِ", "isCorrect": false},
+                {"text": "د. مَعْمَلُ اللُّغَةِ وَمَعْمَلُ الْفَنِّ", "isCorrect": false}
+            ],
+            "rationale": "Ini sesuai dengan yang disebutkan Ahmad dalam dialog (Lab Sains dan Lab Komputer)."
+        },
+        {
+            "questionNumber": 8,
+            "question": "Setelah sekolah, mereka akan... (Video Istima')",
+            "answerOptions": [
+                {"text": "أ. يَذْهَبَانِ إِلَى الْمَكْتَبَةِ", "isCorrect": false},
+                {"text": "ب. يَلْعَبَانِ كُرَةَ الْقَدَمِ فِي الْمَلْعَبِ", "isCorrect": true},
+                {"text": "ج. يَذْهَبَانِ إِلَى الْمَعْمَلِ", "isCorrect": false},
+                {"text": "د. يُرِيحَانِ فِي الْحَدِيقَةِ", "isCorrect": false}
+            ],
+            "rationale": "Mereka sepakat untuk bermain sepak bola (يَلْعَبَانِ كُرَةَ الْقَدَمِ) di lapangan."
+        },
+        {
+            "questionNumber": 9,
+            "question": "Di mana tempat mereka akan bermain sepak bola? (Video Istima')",
+            "answerOptions": [
+                {"text": "أ. فِي الْمَعْمَلِ", "isCorrect": false},
+                {"text": "ب. فِي الْمَكْتَبَةِ", "isCorrect": false},
+                {"text": "ج. فِي الْمَلْعَبِ", "isCorrect": true},
+                {"text": "د. فِي الْمَسْجِدِ", "isCorrect": false}
+            ],
+            "rationale": "الْمَلْعَبُ adalah kata dalam bahasa Arab untuk lapangan, tempat bermain olahraga."
+        },
+        {
+            "questionNumber": 10,
+            "question": "Apa tujuan mereka berbicara di taman sekolah? (Video Istima')",
+            "answerOptions": [
+                {"text": "أ. لِلتَّحَدُّثِ عَنِ الْمَرَافِقِ فِي الْمَدْرَسَةِ", "isCorrect": true},
+                {"text": "ب. لِقِرَاءَةِ الْكِتَابِ", "isCorrect": false},
+                {"text": "ج. لِزِيَارَةِ الْمَعْمَلِ", "isCorrect": false},
+                {"text": "د. لِلتَّعَلُّمِ فِي الْفَصْلِ", "isCorrect": false}
+            ],
+            "rationale": "Seluruh inti percakapan mereka adalah membahas dan membandingkan fasilitas sekolah."
+        },
+        {
+            "questionNumber": 11,
+            "question": "Di kota manakah sekolah tersebut berada? (Berdasarkan teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. مَدِينَةُ جَاكَرْتَا", "isCorrect": false},
+                {"text": "b. مَدِينَةُ بَانْدُونج", "isCorrect": false},
+                {"text": "c. مَدِينَةُ مَالَانْج", "isCorrect": true},
+                {"text": "d. مَدِينَةُ سُورَابَايَا", "isCorrect": false}
+            ],
+            "rationale": "Baris pertama teks Qiro'ah menyatakan ...بِمَدِينَةِ مَا لَانْج (di kota Malang)."
+        },
+        {
+            "questionNumber": 12,
+            "question": "Apa nama sekolah dalam teks tersebut? (Teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. الْمَدْرَسَةُ الاِبْتِدَائِيَّةُ", "isCorrect": false},
+                {"text": "b. الْمَدْرَسَةُ الْمُتَوَسِّطَةُ الْحُكُومِيَّةُ 1", "isCorrect": true},
+                {"text": "c. الْمَدْرَسَةُ الثَّانَوِيَّةُ", "isCorrect": false},
+                {"text": "d. الْمَدْرَسَةُ الْخَاصَّةُ", "isCorrect": false}
+            ],
+            "rationale": "Teks secara lengkap menyebutkan 'الْمَدْرَسَةُ الْمُتَوَسِّطَةُ الْحُكُومِيَّةُ 1' (SMP Negeri 1)."
+        },
+        {
+            "questionNumber": 13,
+            "question": "Bagaimana keadaan sekolah dalam teks? (Teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. صَغِيرَةٌ وَقَبِيحَةٌ", "isCorrect": false},
+                {"text": "b. كَبِيرَةٌ وَوَاسِعَةٌ وَجَمِيلَةٌ", "isCorrect": true},
+                {"text": "c. قَدِيمَةٌ وَمُزْدَحِمَةٌ", "isCorrect": false},
+                {"text": "d. بَعِيدَةٌ عَنِ الْمَسْجِدِ", "isCorrect": false}
+            ],
+            "rationale": "Ini sesuai dengan deskripsi di baris kedua teks: 'كَبِيرَةٌ وَوَاسِعَةٌ وَجَمِيلَةٌ' (Besar, luas, dan indah)."
+        },
+        {
+            "questionNumber": 14,
+            "question": "Sekolah itu dekat dengan apa? (Teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. السُّوقِ", "isCorrect": false},
+                {"text": "b. الْمَسْجِدِ الْكَبِيرِ الْفَلَاحِ", "isCorrect": true},
+                {"text": "c. الْمَكْتَبَةِ", "isCorrect": false},
+                {"text": "d. الْمَسْبَحِ", "isCorrect": false}
+            ],
+            "rationale": "Baris kedua secara jelas menyatakan '...قَرِيبَةٌ مِنَ الْمَسْجِدِ الْكَبِيرِ 'الْفَلَاح'."
+        },
+        {
+            "questionNumber": 15,
+            "question": "Di jalan apa sekolah itu berada? (Teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. شارع بَانْدُونج", "isCorrect": true},
+                {"text": "b. شارع جَاكَرْتَا", "isCorrect": false},
+                {"text": "c. شارع سُورَابَايَا", "isCorrect": false},
+                {"text": "d. شارع الفَلَاحِ", "isCorrect": false}
+            ],
+            "rationale": "Teks menyatakan 'تَقَعُ مَدْرَسَتِيْ فِيْ شَارِع بَانْدُونْج...' (Sekolahku terletak di Jalan Bandung...)."
+        },
+        {
+            "questionNumber": 16,
+            "question": "Apa arti kata مَرَافِقُ مَدْرَسِيَّةٌ?",
+            "answerOptions": [
+                {"text": "a. Kegiatan sekolah", "isCorrect": false},
+                {"text": "b. Fasilitas sekolah", "isCorrect": true},
+                {"text": "c. Siswa sekolah", "isCorrect": false},
+                {"text": "d. Lingkungan sekolah", "isCorrect": false}
+            ],
+            "rationale": "'مَرَافِقُ' adalah bentuk jamak dari 'مِرْفَقٌ' yang berarti fasilitas."
+        },
+        {
+            "questionNumber": 17,
+            "question": "Manakah di bawah ini yang termasuk fasilitas sekolah dalam teks? (Teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. مَكْتَبَةٌ", "isCorrect": true},
+                {"text": "b. بَيْتٌ", "isCorrect": false},
+                {"text": "c. سُوقٌ", "isCorrect": false},
+                {"text": "d. مَطْعَمٌ", "isCorrect": false}
+            ],
+            "rationale": "Teks Qiro'ah secara eksplisit menyebutkan 'مَكْتَبَةٌ' (Perpustakaan) sebagai salah satu fasilitas."
+        },
+        {
+            "questionNumber": 18,
+            "question": "Apa arti kata مَعْمَلٌ yang terdapat dalam teks? (Teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. Lapangan", "isCorrect": false},
+                {"text": "b. Laboratorium", "isCorrect": true},
+                {"text": "c. Kantin", "isCorrect": false},
+                {"text": "d. Gudang", "isCorrect": false}
+            ],
+            "rationale": "'مَعْمَلٌ' adalah istilah yang benar untuk laboratorium."
+        },
+        {
+            "questionNumber": 19,
+            "question": "Ruangan siapakah yang disebut di teks sebagai غُرْفَةُ رَئِيسِ الْمَدْرَسَةِ? (Teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. Ruang guru", "isCorrect": false},
+                {"text": "b. Ruang kepala sekolah", "isCorrect": true},
+                {"text": "c. Ruang kebersihan", "isCorrect": false},
+                {"text": "d. Ruang kelas", "isCorrect": false}
+            ],
+            "rationale": "'رَئِيسِ الْمَدْرَسَةِ' berarti 'pemimpin/kepala sekolah'."
+        },
+        {
+            "questionNumber": 20,
+            "question": "Apa arti kata مَيْدَانٌ di akhir teks? (Teks Qiro'ah)",
+            "answerOptions": [
+                {"text": "a. Lapangan", "isCorrect": true},
+                {"text": "b. Masjid", "isCorrect": false},
+                {"text": "c. Gudang", "isCorrect": false},
+                {"text": "d. Kantor", "isCorrect": false}
+            ],
+            "rationale": "'مَيْدَانٌ' adalah sinonim dari 'مَلْعَبٌ' yang juga berarti lapangan."
+        }
+    ]
+}
+</script>
+
+        <!-- 
+  =============================================================
+  JavaScript untuk Menjalankan Kuis (SAMA SEPERTI BAB 1)
+  =============================================================
+-->
+        <script>
+            (function () {
+                // Cek dulu, jangan sampe script-nya jalan dua kali kalo user bolak-balik
+                if (window.quizScriptLoaded) {
+                    // Jika sudah di-load, panggil restartQuiz() untuk memulai ulang
+                    // Kita harus pastikan JS-nya di-reset
+                    window.quizScriptLoaded = false;
+                }
+
+                // Kita set 'false' dulu di scope luar, baru set 'true' di dalam
+                // Ini trik biar kalo halaman di-load ulang, scriptnya mau jalan lagi
+                let hasQuizScriptRun = false;
+
+                if (document.getElementById('quiz-container') && !hasQuizScriptRun) {
+                    hasQuizScriptRun = true;
+                    window.quizScriptLoaded = true; // Tandai kalo script udah jalan
+
+                    let currentQuestionIndex = 0;
+                    let score = 0;
+                    let questions = [];
+
+                    const quizContainer = document.getElementById('quiz-container');
+                    const resultContainer = document.getElementById('result-container');
+                    const scoreElement = document.getElementById('score');
+                    const scoreTextElement = document.getElementById('score-text');
+                    const instructionBox = document.getElementById('quiz-instruction');
+
+                    function loadQuiz() {
+                        try {
+                            const quizDataElement = document.getElementById('quiz-data');
+                            if (!quizDataElement) {
+                                console.error('Quiz data element not found!');
+                                quizContainer.innerHTML = '<p>Error: Gagal memuat data kuis.</p>';
+                                return;
+                            }
+                            const quizData = JSON.parse(quizDataElement.textContent);
+                            if (!quizData || !quizData.questions) {
+                                throw new Error('Invalid quiz data structure');
+                            }
+                            questions = quizData.questions;
+                            startQuiz();
+                        } catch (error) {
+                            console.error('Failed to load or parse quiz data:', error);
+                            quizContainer.innerHTML = `<p>Error: Gagal memuat kuis. ${error.message}</p>`;
+                        }
+                    }
+
+                    function startQuiz() {
+                        currentQuestionIndex = 0;
+                        score = 0;
+                        resultContainer.style.display = 'none';
+                        instructionBox.style.display = 'block';
+                        quizContainer.style.display = 'block';
+                        showQuestion(questions[currentQuestionIndex]);
+                    }
+
+                    function showQuestion(question) {
+                        if (!question) {
+                            showResults();
+                            return;
+                        }
+
+                        const mainCard = quizContainer.closest('.main-card');
+                        if (mainCard) {
+                            mainCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+
+                        let optionsHtml = '';
+                        question.answerOptions.forEach((option, index) => {
+                            optionsHtml += `
+                        <button 
+                            class="btn quiz-option" 
+                            style="background: #f1f5f9; color: #333; width: 100%; justify-content: flex-start; text-align: left; margin-bottom: 10px; padding: 15px 20px;"
+                            onclick="selectAnswer(this, ${option.isCorrect || false}, '${btoa(encodeURIComponent(question.rationale))}')"
+                        >
+                            <span class="arabic-text">${option.text}</span>
+                        </button>
+                    `;
+                        });
+
+                        quizContainer.innerHTML = `
+                    <h3 class="arabic-text" style="font-size: 20px; font-weight: 700; color: #ea580c; margin-bottom: 15px;">
+                        السُّؤَالُ ${question.questionNumber}:
+                    </h3>
+                    <p style="font-size: 18px; line-height: 1.8; color: #333; margin-bottom: 20px; font-weight: 600;" class="${isArabic(question.question) ? 'arabic-text' : ''}">
+                        ${question.question}
+                    </p>
+                    <div id="options-container">
+                        ${optionsHtml}
+                    </div>
+                    <div id="rationale-container" style="display: none; margin-top: 15px; padding: 15px; border-radius: 10px; font-size: 14px;"></div>
+                    <button 
+                        id="next-btn" 
+                        class="btn btn-secondary quiz" 
+                        style="display: none; margin-top: 20px; width: 100%;"
+                        onclick="nextQuestion()"
+                    >
+                        Lanjut <span>&rarr;</span>
+                    </button>
+                `;
+                    }
+
+                    function isArabic(text) {
+                        const arabicRegex = /[\u0600-\u06FF]/;
+                        return arabicRegex.test(text);
+                    }
+
+                    window.selectAnswer = function (button, isCorrect, encodedRationale) {
+                        const optionsContainer = document.getElementById('options-container');
+                        const rationaleContainer = document.getElementById('rationale-container');
+                        const nextBtn = document.getElementById('next-btn');
+
+                        const allOptions = optionsContainer.querySelectorAll('.quiz-option');
+                        allOptions.forEach(btn => {
+                            btn.disabled = true;
+                            btn.style.cursor = 'not-allowed';
+                            btn.style.opacity = '0.7';
+                        });
+
+                        try {
+                            const rationale = decodeURIComponent(atob(encodedRationale));
+                            rationaleContainer.innerHTML = `<strong>Penjelasan:</strong> ${rationale}`;
+                            rationaleContainer.style.display = 'block';
+                        } catch (e) {
+                            console.error("Error decoding rationale:", e);
+                            rationaleContainer.innerHTML = '<strong>Penjelasan:</strong> Gagal memuat penjelasan.';
+                            rationaleContainer.style.display = 'block';
+                        }
+
+                        if (isCorrect) {
+                            score++;
+                            button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                            button.style.color = 'white';
+                            button.style.opacity = '1';
+                            rationaleContainer.style.background = 'rgba(16, 185, 129, 0.1)';
+                            rationaleContainer.style.border = '2px solid #10b981';
+                        } else {
+                            button.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                            button.style.color = 'white';
+                            button.style.opacity = '1';
+                            rationaleContainer.style.background = 'rgba(239, 68, 68, 0.1)';
+                            rationaleContainer.style.border = '2px solid #ef4444';
+
+                            allOptions.forEach(btn => {
+                                const optionText = btn.querySelector('.arabic-text').textContent;
+                                const correctOption = questions[currentQuestionIndex].answerOptions.find(opt => opt.isCorrect);
+                                if (correctOption && correctOption.text === optionText) {
+                                    btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                                    btn.style.color = 'white';
+                                    btn.style.opacity = '1';
+                                }
+                            });
+                        }
+
+                        nextBtn.style.display = 'inline-flex';
+                    }
+
+                    window.nextQuestion = function () {
+                        currentQuestionIndex++;
+                        if (currentQuestionIndex < questions.length) {
+                            showQuestion(questions[currentQuestionIndex]);
+                        } else {
+                            showResults();
+                        }
+                    }
+
+                    function showResults() {
+                        quizContainer.style.display = 'none';
+                        instructionBox.style.display = 'none';
+                        resultContainer.style.display = 'block';
+
+                        const percentage = Math.round((score / questions.length) * 100);
+                        scoreElement.textContent = `${percentage}%`;
+
+                        let text = '';
+                        if (percentage === 100) {
+                            text = `Mumtaz! (Luar Biasa!) Kamu menjawab semua ${questions.length} soal dengan benar.`;
+                            scoreElement.style.color = '#10b981';
+                        } else if (percentage >= 80) {
+                            text = `Jayyid Jiddan! (Bagus Sekali!) Kamu benar ${score} dari ${questions.length} soal.`;
+                            scoreElement.style.color = '#10b981';
+                        } else if (percentage >= 60) {
+                            text = `Jayyid! (Bagus) Kamu benar ${score} dari ${questions.length} soal. Terus berlatih!`;
+                            scoreElement.style.color = '#f59e0b';
+                        } else {
+                            text = `Butuh latihan lagi. Kamu benar ${score} dari ${questions.length} soal. Coba lagi!`;
+                            scoreElement.style.color = '#ef4444';
+                        }
+                        scoreTextElement.textContent = text;
+
+                        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+
+                    window.restartQuiz = function () {
+                        // Reset flag biar script bisa jalan lagi kalo halaman di-load ulang
+                        window.quizScriptLoaded = false;
+                        hasQuizScriptRun = false;
+                        loadQuiz();
+                    }
+
+                    loadQuiz();
+                }
+            })();
+        </script>
+    </div>
+    <a href="../bab2-menu.html">
+        <button class="btn btn-back ripple-effect" id="backButtonTop" style="display: flex;">
+            <span>←</span> <span>KEMBALI</span> </button>
+    </a>
+</body>
+
+</html>
